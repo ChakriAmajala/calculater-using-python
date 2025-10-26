@@ -15,9 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
-                }
+                sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
             }
         }
 
@@ -25,7 +23,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'dockerhub-cred', variable: 'DOCKERHUB_PASS')]) {
                     sh """
-                    echo $DOCKERHUB_PASS | docker login -u chakri --password-stdin
+                    echo $DOCKERHUB_PASS | docker login -u chakrimajaladocker --password-stdin
                     docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
                     """
                 }
@@ -42,4 +40,3 @@ pipeline {
         }
     }
 }
-
