@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "chakri/calculater-python"
+        DOCKER_IMAGE = "chakriamajaladocker/calculater-python"
         DOCKER_TAG = "latest"
     }
 
